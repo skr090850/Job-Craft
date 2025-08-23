@@ -3,16 +3,21 @@
     <!-- Base application theme for Dark Mode -->
     <style name="Theme.JobCraft" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="primaryColor">@color/blue</item>
         <item name="textPrimaryColor">@color/white</item>
-        <item name="cardPrimaryColor">@color/brightGreen</item>
-        <item name="splashbg">@color/blueViolet</item>
-        <item name="appBgColor">@color/white</item>
-        <item name="appColor">@color/blue</item>
-        <!-- Secondary brand color. -->
-        <item name="secondaryColor">@color/violet</item>
         <item name="textSecondaryColor">@color/lightGray</item>
-        <item name="cardSecondaryColor">@color/green</item>
+
+        <item name="primaryBgColor">@color/blueViolet</item>
+        <item name="secondaryBgColor">@color/white</item>
+
+        <item name="appColor">@color/blue</item>
+        <item name="appBgColor">@color/white</item>
+
+        <item name="btnBgColor">@color/white</item>
+        <item name="btnTextColor">@color/blue</item>
+
+        <item name="primaryColor">@color/white</item>
+        <item name="secondaryColor">@color/violet</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.JobCraft"
         tools:targetApi="31">
         <activity
+            android:name=".splash_and_onboarding.OnBoarding"
+            android:exported="false" />
+        <activity
             android:name=".splash_and_onboarding.SplashScreen"
             android:exported="true">
             <intent-filter>
