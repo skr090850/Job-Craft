@@ -6,7 +6,7 @@
     android:background="?attr/splashbg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen">
+    tools:context=".splash_and_onboarding.SplashScreen">
 
     <LinearLayout
         android:layout_width="match_parent"
