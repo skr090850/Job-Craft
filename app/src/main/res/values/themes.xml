@@ -1,9 +1,20 @@
+<!-- res/values/themes.xml -->
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.JobCraft" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Base application theme for Light Mode -->
+    <style name="Theme.JobCraft" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="primaryColor">@color/blue</item>
+        <item name="textPrimaryColor">@color/black</item>
+        <item name="cardPrimaryColor">@color/brightGreen</item>
+        <item name="splashbg">@color/white</item>
+        <item name="appBgColor">@color/blue</item>
+        <item name="appColor">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="secondaryColor">@color/blueViolet</item>
+        <item name="textSecondaryColor">@color/darkGray</item>
+        <item name="cardSecondaryColor">@color/green</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
     </style>
-
-    <style name="Theme.JobCraft" parent="Base.Theme.JobCraft" />
 </resources>

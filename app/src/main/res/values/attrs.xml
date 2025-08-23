@@ -7,4 +7,6 @@
     <attr name="secondaryColor" format="color" />
     <attr name="textSecondaryColor" format="color" />
     <attr name="cardSecondaryColor" format="color" />
+    <attr name="appBgColor" format="color" />
+    <attr name="appColor" format="color" />
 </resources>

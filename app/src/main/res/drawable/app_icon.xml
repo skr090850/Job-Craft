@@ -6,7 +6,7 @@
     android:viewportHeight="40">
   <path
       android:pathData="M12,0L28,0A12,12 0,0 1,40 12L40,28A12,12 0,0 1,28 40L12,40A12,12 0,0 1,0 28L0,12A12,12 0,0 1,12 0z"
-      android:fillColor="#2363F7"/>
+      android:fillColor="?attr/appBgColor"/>
   <group>
     <clip-path
         android:pathData="M12,0L28,0A12,12 0,0 1,40 12L40,28A12,12 0,0 1,28 40L12,40A12,12 0,0 1,0 28L0,12A12,12 0,0 1,12 0z"/>
@@ -19,8 +19,8 @@
             android:endX="0.5"
             android:endY="36.5"
             android:type="linear">
-          <item android:offset="0" android:color="#FF2869FE"/>
-          <item android:offset="1" android:color="#E22869FE"/>
+          <item android:offset="0" android:color="?attr/appBgColor"/>
+          <item android:offset="1" android:color="?attr/appBgColor"/>
         </gradient>
       </aapt:attr>
     </path>
@@ -33,6 +33,6 @@
       android:fillColor="#42E271"/>
   <path
       android:pathData="M20,8.412a8.963,8.963 0,1 0,0 17.926,8.963 8.963,0 0,0 0,-17.926ZM9.5,17.375c0,-5.799 4.701,-10.5 10.5,-10.5s10.5,4.701 10.5,10.5 -4.701,10.5 -10.5,10.5 -10.5,-4.701 -10.5,-10.5ZM20,28.71c0.425,0 0.769,0.344 0.769,0.768v2.9a0.769,0.769 0,0 1,-1.538 0v-2.9c0,-0.424 0.344,-0.769 0.769,-0.769Z"
-      android:fillColor="#fff"
+      android:fillColor="?attr/appColor"
       android:fillType="evenOdd"/>
 </vector>
