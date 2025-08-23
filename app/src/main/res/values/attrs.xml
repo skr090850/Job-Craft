@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="primaryColor" format="color" />
+    <attr name="textPrimaryColor" format="color" />
+    <attr name="cardPrimaryColor" format="color" />
+    <attr name="splashbg" format="color" />
+    <attr name="secondaryColor" format="color" />
+    <attr name="textSecondaryColor" format="color" />
+    <attr name="cardSecondaryColor" format="color" />
+</resources>
