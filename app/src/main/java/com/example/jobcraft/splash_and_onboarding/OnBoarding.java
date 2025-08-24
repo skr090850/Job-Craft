@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.jobcraft.R;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class OnBoarding extends AppCompatActivity {
     private SliderAdapter sliderAdapter;
     private List<SliderItem> sliderItems;
     private Handler sliderHandler = new Handler(Looper.getMainLooper());
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class OnBoarding extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.splash_and_onboarding_on_boarding);
         viewPager2 = findViewById(R.id.onboardingSlider);
+        tabLayout = findViewById(R.id.onBoardingTabIndicator);
         sliderItems = new ArrayList<>();
 
         sliderItems.add(new SliderItem(R.drawable.on_boarding_ic_1,"Search Job Easier\nand More Effective","Make your experience of searching job\nmore easier and more effective"));
@@ -40,6 +43,10 @@ public class OnBoarding extends AppCompatActivity {
 
         viewPager2.setPageTransformer(new DepthPageTransformer());
 
+        for (int i = 0; i < sliderItems.size(); i++) {
+            tabLayout.addTab(tabLayout.newTab());
+        }
+
         int startPosition = Integer.MAX_VALUE / 2;
         viewPager2.setCurrentItem(startPosition - (startPosition % sliderItems.size()), false);
 
@@ -48,7 +55,28 @@ public class OnBoarding extends AppCompatActivity {
                 super.onPageSelected(position);
                 sliderHandler.removeCallbacks(sliderRunnable);
                 sliderHandler.postDelayed(sliderRunnable,3000);
+
+                int realPosition = position % sliderItems.size();
+                tabLayout.selectTab(tabLayout.getTabAt(realPosition));
             }
+        });
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int tabPosition = tab.getPosition();
+                int currentItem = viewPager2.getCurrentItem();
+                int currentRealItem = currentItem % sliderItems.size();
+                int diff = tabPosition - currentRealItem;
+
+                if (diff != 0) {
+                    viewPager2.setCurrentItem(currentItem + diff, true);
+                }
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
     }
 
@@ -64,7 +92,7 @@ public class OnBoarding extends AppCompatActivity {
         ValueAnimator animator = ValueAnimator.ofInt(0, viewPager2.getWidth());
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            private int oldDragPosition = 2;
+            private int oldDragPosition = 1;
 
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
