@@ -29,7 +29,8 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
     @Override
     public void onBindViewHolder(@NonNull SliderAdapter.SliderViewHolder holder, int position) {
-        SliderItem currentItem = sliderItems.get(position);
+        int realPosition = position % sliderItems.size();
+        SliderItem currentItem = sliderItems.get(realPosition);
         holder.imageView.setImageResource(currentItem.getImage());
         holder.title.setText(currentItem.getTitle());
         holder.subTitle.setText(currentItem.getSubTitle());
@@ -37,7 +38,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
     @Override
     public int getItemCount() {
-        return sliderItems.size();
+        return Integer.MAX_VALUE;
     }
     static class SliderViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
