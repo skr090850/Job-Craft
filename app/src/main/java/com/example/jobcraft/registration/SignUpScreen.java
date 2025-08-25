@@ -19,7 +19,6 @@ public class SignUpScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.registration_sign_up_screen);
         signInTxtBtn = findViewById(R.id.signInTextBtn);
         signInTxtBtn.setOnClickListener(new View.OnClickListener() {
@@ -28,11 +27,6 @@ public class SignUpScreen extends AppCompatActivity {
                 Intent intent = new Intent(SignUpScreen.this, SignInScreen.class);
                 startActivity(intent);
             }
-        });
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
         });
     }
 }
