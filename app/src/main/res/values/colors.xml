@@ -10,7 +10,7 @@
     <color name="pink">#FFFF5FBF</color>
     <color name="yellow">#FFFFC24A</color>
     <color name="red">#FFFA4848</color>
-    <color name="lightGray">#FFD2D2D2</color>
-    <color name="darkGray">#FF504F4F</color>
+    <color name="lightGray">#CECCCC</color>
+    <color name="darkGray">#616060</color>
     <color name="darkBlue">#FF063EBC</color>
 </resources>

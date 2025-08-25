@@ -16,13 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.jobcraft.R;
-import com.example.jobcraft.registration.SignIn;
+import com.example.jobcraft.registration.SignInScreen;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnBoarding extends AppCompatActivity {
+public class OnBoardingScreen extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private SliderAdapter sliderAdapter;
     private List<SliderItem> sliderItems;
@@ -34,7 +34,7 @@ public class OnBoarding extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.splash_and_onboarding_on_boarding);
+        setContentView(R.layout.splash_and_onboarding_on_boarding_screen);
         viewPager2 = findViewById(R.id.onboardingSlider);
         tabLayout = findViewById(R.id.onBoardingTabIndicator);
         startBtn = findViewById(R.id.onBoardingBtn);
@@ -87,7 +87,7 @@ public class OnBoarding extends AppCompatActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OnBoarding.this, SignIn.class);
+                Intent intent = new Intent(OnBoardingScreen.this, SignInScreen.class);
                 startActivity(intent);
             }
         });
