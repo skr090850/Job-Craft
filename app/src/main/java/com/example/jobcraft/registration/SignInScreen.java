@@ -18,7 +18,7 @@ import com.example.jobcraft.R;
 import com.example.jobcraft.splash_and_onboarding.OnBoardingScreen;
 
 public class SignInScreen extends AppCompatActivity {
-    TextView signUpTxtBtn;
+    TextView signUpTxtBtn,forgotTxtBtn;
     ImageButton signInBackBtn;
 
     @Override
@@ -28,12 +28,19 @@ public class SignInScreen extends AppCompatActivity {
 
         signUpTxtBtn = findViewById(R.id.signUpTextBtn);
         signInBackBtn = findViewById(R.id.signInBackBtn);
+        forgotTxtBtn = findViewById(R.id.forgotTextBtn);
+        forgotTxtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignInScreen.this,ResetPasswordScreen.class);
+                startActivity(intent);
+            }
+        });
         signUpTxtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignInScreen.this, SignUpScreen.class);
                 startActivity(intent);
-                finish();
             }
         });
         signInBackBtn.setOnClickListener(new View.OnClickListener() {

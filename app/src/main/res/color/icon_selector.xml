@@ -1,5 +1,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="?attr/textPrimaryColor"  android:state_focused="true"/>
-    <item android:color="?attr/textPrimaryColor" android:state_activated="true"/>
+    <item android:color="?attr/textPrimaryColor" android:state_selected="true"/>
     <item android:color="?attr/textSecondaryColor"/>
 </selector>
