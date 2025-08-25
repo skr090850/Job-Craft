@@ -3,16 +3,20 @@ package com.example.jobcraft.splash_and_onboarding;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.jobcraft.R;
+import com.example.jobcraft.registration.SignIn;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -24,6 +28,7 @@ public class OnBoarding extends AppCompatActivity {
     private List<SliderItem> sliderItems;
     private Handler sliderHandler = new Handler(Looper.getMainLooper());
     private TabLayout tabLayout;
+    private Button startBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ public class OnBoarding extends AppCompatActivity {
         setContentView(R.layout.splash_and_onboarding_on_boarding);
         viewPager2 = findViewById(R.id.onboardingSlider);
         tabLayout = findViewById(R.id.onBoardingTabIndicator);
+        startBtn = findViewById(R.id.onBoardingBtn);
         sliderItems = new ArrayList<>();
 
         sliderItems.add(new SliderItem(R.drawable.on_boarding_ic_1,"Search Job Easier\nand More Effective","Make your experience of searching job\nmore easier and more effective"));
@@ -77,6 +83,13 @@ public class OnBoarding extends AppCompatActivity {
             public void onTabUnselected(TabLayout.Tab tab) {}
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
+        });
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OnBoarding.this, SignIn.class);
+                startActivity(intent);
+            }
         });
     }
 
