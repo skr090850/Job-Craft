@@ -1,11 +1,13 @@
 package com.example.jobcraft.registration;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import com.example.jobcraft.R;
 public class OtpVerificationScreen extends AppCompatActivity {
     private EditText otpDigit1, otpDigit2, otpDigit3, otpDigit4;
     private TextView userEmail;
+    private Button resetBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,14 @@ public class OtpVerificationScreen extends AppCompatActivity {
         otpDigit3 = findViewById(R.id.otpDigit3);
         otpDigit4 = findViewById(R.id.otpDigit4);
         userEmail = findViewById(R.id.verificationEmail);
+        resetBtn = findViewById(R.id.otpScreenResetBtn);
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OtpVerificationScreen.this,EnterPasswordScreen.class);
+                startActivity(intent);
+            }
+        });
         String email = getIntent().getStringExtra("USER_EMAIL");
         userEmail.setText(email);
 
