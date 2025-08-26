@@ -34,6 +34,7 @@ public class ResetPasswordScreen extends AppCompatActivity {
                 Intent intent = new Intent(ResetPasswordScreen.this, OtpVerificationScreen.class);
                 intent.putExtra("USER_EMAIL",email);
                 startActivity(intent);
+                finish();
             }
         });
         resetPasswordBackBtn.setOnClickListener(new View.OnClickListener() {

@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +23,7 @@ import com.example.jobcraft.R;
 public class OtpVerificationScreen extends AppCompatActivity {
     private EditText otpDigit1, otpDigit2, otpDigit3, otpDigit4;
     private TextView userEmail;
+    ImageButton backBtn;
     private Button resetBtn;
 
     @Override
@@ -35,11 +37,19 @@ public class OtpVerificationScreen extends AppCompatActivity {
         otpDigit4 = findViewById(R.id.otpDigit4);
         userEmail = findViewById(R.id.verificationEmail);
         resetBtn = findViewById(R.id.otpScreenResetBtn);
+        backBtn = findViewById(R.id.verificationBackBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OtpVerificationScreen.this,EnterPasswordScreen.class);
                 startActivity(intent);
+                finish();
             }
         });
         String email = getIntent().getStringExtra("USER_EMAIL");
