@@ -6,7 +6,8 @@
         <item name="textPrimaryColor">@color/white</item>
         <item name="textSecondaryColor">@color/lightGray</item>
 
-        <item name="primaryBgColor">@color/blueViolet</item>
+<!--        <item name="primaryBgColor">@color/blueViolet</item>-->
+        <item name="primaryBgColor">@color/black</item>
         <item name="secondaryBgColor">@color/white</item>
 
         <item name="appColor">@color/blue</item>
