@@ -313,6 +313,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/continueTxt">
 
                     <ImageButton
+                        android:id="@+id/signInFacebook"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
@@ -324,6 +325,7 @@
                         android:contentDescription="Sign in with Facebook" />
 
                     <ImageButton
+                        android:id="@+id/signInGoogle"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
@@ -335,6 +337,7 @@
                         android:contentDescription="Sign in with Google" />
 
                     <ImageButton
+                        android:id="@+id/signInApple"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
@@ -385,4 +388,22 @@
 
         </LinearLayout>
     </ScrollView>
+    <View
+        android:id="@+id/dimOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        android:indeterminateTint="?attr/btnBgColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

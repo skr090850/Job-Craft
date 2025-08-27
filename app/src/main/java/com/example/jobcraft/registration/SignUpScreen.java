@@ -190,7 +190,7 @@ public class SignUpScreen extends AppCompatActivity {
                 } else {
                     showLoading(false);
                     Log.w("FirebaseAuth", "createUserWithEmail: failure", task.getException());
-                    CustomToast.showToast(SignUpScreen.this, "Authentication Failed." + task.getException().getMessage(), CustomToast.ERROR);
+                    CustomToast.showToast(SignUpScreen.this, "Authentication failed: " + task.getException().getMessage(), CustomToast.ERROR);
                 }
             }
         });
@@ -268,7 +268,7 @@ public class SignUpScreen extends AppCompatActivity {
                         } else {
                             showLoading(false);
                             Log.w("FirebaseAuth", "signInWithCredential:failure", task.getException());
-                            CustomToast.showToast(SignUpScreen.this, "Authentication Failed.", CustomToast.ERROR);
+                            CustomToast.showToast(SignUpScreen.this, "Authentication failed: "+task.getException().getMessage(), CustomToast.ERROR);
                         }
                     }
                 });
