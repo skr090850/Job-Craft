@@ -105,14 +105,13 @@ public class SignUpScreen extends AppCompatActivity {
         appleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(SignUpScreen.this,"Apple SignIn is not working",Toast.LENGTH_SHORT).show();
-                CustomToast.showToast(SignUpScreen.this,"Apple SignIn is not working",CustomToast.ERROR);
+                CustomToast.showToast(SignUpScreen.this,"Apple Sign in is not working",CustomToast.ERROR);
             }
         });
         facebookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SignUpScreen.this,"Facebook SignIn is not working",Toast.LENGTH_SHORT).show();
+                CustomToast.showToast(SignUpScreen.this,"Facebook Sign in is not working",CustomToast.ERROR);
             }
         });
         signInTxtBtn.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +190,7 @@ public class SignUpScreen extends AppCompatActivity {
                 } else {
                     showLoading(false);
                     Log.w("FirebaseAuth", "createUserWithEmail: failure", task.getException());
-                    Toast.makeText(SignUpScreen.this, "Authentication Failed." + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    CustomToast.showToast(SignUpScreen.this, "Authentication Failed." + task.getException().getMessage(), CustomToast.ERROR);
                 }
             }
         });
@@ -207,7 +206,7 @@ public class SignUpScreen extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 showLoading(false);
                 Log.d("FireStore", "DocumentSnapshot successfully written");
-                Toast.makeText(SignUpScreen.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                CustomToast.showToast(SignUpScreen.this, "Registration Successful", CustomToast.SUCCESS);
                 Intent intent = new Intent(SignUpScreen.this, SignInScreen.class);
                 startActivity(intent);
                 finish();
@@ -217,7 +216,7 @@ public class SignUpScreen extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 showLoading(false);
                 Log.w("FireStore", "Error Writing document", e);
-                Toast.makeText(SignUpScreen.this, "Error saving user details", Toast.LENGTH_SHORT).show();
+                CustomToast.showToast(SignUpScreen.this, "Error saving user details", CustomToast.ERROR);
             }
         });
 
@@ -251,7 +250,7 @@ public class SignUpScreen extends AppCompatActivity {
             } catch (ApiException e) {
                 showLoading(false);
                 Log.w("GoogleSignIn", "Google sign in failed", e);
-                Toast.makeText(this, "Google Sign In Failed", Toast.LENGTH_SHORT).show();
+                CustomToast.showToast(this, "Google Sign In Failed",CustomToast.ERROR);
             }
         }
     }
@@ -269,7 +268,7 @@ public class SignUpScreen extends AppCompatActivity {
                         } else {
                             showLoading(false);
                             Log.w("FirebaseAuth", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(SignUpScreen.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
+                            CustomToast.showToast(SignUpScreen.this, "Authentication Failed.", CustomToast.ERROR);
                         }
                     }
                 });
@@ -288,7 +287,7 @@ public class SignUpScreen extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> {
                     showLoading(false);
                     Log.d("Firestore", "Google user details saved successfully.");
-                    Toast.makeText(SignUpScreen.this, "Sign In Successful!", Toast.LENGTH_SHORT).show();
+                    CustomToast.showToast(SignUpScreen.this, "Sign In Successful!", CustomToast.SUCCESS);
                     Intent intent = new Intent(SignUpScreen.this, DashboardScreen.class);
                     startActivity(intent);
                     finish();
@@ -296,7 +295,7 @@ public class SignUpScreen extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     showLoading(false);
                     Log.w("Firestore", "Error saving Google user details", e);
-                    Toast.makeText(SignUpScreen.this, "Failed to save user details.", Toast.LENGTH_SHORT).show();
+                    CustomToast.showToast(SignUpScreen.this, "Failed to save user details.", CustomToast.ERROR);
                 });
     }
 }
