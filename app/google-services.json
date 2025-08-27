@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "114877420379",
+    "project_id": "job-craft-d2e71",
+    "storage_bucket": "job-craft-d2e71.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114877420379:android:dcf5fd510e8d8311de807e",
+        "android_client_info": {
+          "package_name": "com.example.jobcraft"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRPqvLtGCu1R5BwaE30li4q8BULfbbiv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
