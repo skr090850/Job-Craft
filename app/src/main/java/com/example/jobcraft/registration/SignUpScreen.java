@@ -42,8 +42,9 @@ public class SignUpScreen extends AppCompatActivity {
     private Button signUpBtn;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private TextInputLayout tilName,tilEmail,tilPass,tilConfPass;
-    private EditText etName,etEmail,etPass,etConfPass;
+    private TextInputLayout tilName, tilEmail, tilPass, tilConfPass;
+    private EditText etName, etEmail, etPass, etConfPass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,7 @@ public class SignUpScreen extends AppCompatActivity {
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 registerUser();
             }
         });
@@ -94,53 +95,66 @@ public class SignUpScreen extends AppCompatActivity {
             }
         }
     }
-    private void registerUser(){
+
+    private void registerUser() {
         String name = etName.getText().toString().trim(),
                 email = etEmail.getText().toString().trim(),
                 password = etPass.getText().toString().trim(),
                 confirmPassword = etConfPass.getText().toString().trim();
 
-        if(name.isEmpty()){
+        if (name.isEmpty()) {
             tilName.setError("Name cannot be empty");
-        } else if (email.isEmpty()) {
-            tilEmail.setError("Email cannot be empty");
-        } else if (password.isEmpty()) {
-            tilPass.setError("Password cannot be empty");
+            return;
         } else {
             tilName.setError(null);
+        }
+
+        if (email.isEmpty()) {
+            tilEmail.setError("Email cannot be empty");
+            return;
+        } else {
             tilEmail.setError(null);
+        }
+
+        if (password.isEmpty()) {
+            tilPass.setError("Password cannot be empty");
+            return;
+        } else {
             tilPass.setError(null);
         }
-        if (!password.equals(confirmPassword)){
+
+        if (!password.equals(confirmPassword)) {
             tilConfPass.setError("Password do not match");
-        }else {
+            return;
+        } else {
             tilConfPass.setError(null);
         }
 
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Log.d("FirebaseAuth","createUserWithEmail: Success");
+                if (task.isSuccessful()) {
+                    Log.d("FirebaseAuth", "createUserWithEmail: Success");
                     FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                    saveUserDetails(firebaseUser,name,email);
-                }else{
-                    Log.w("FirebaseAuth","createUserWithEmail: failure",task.getException());
-                    Toast.makeText(SignUpScreen.this,"Authentication Failed.",Toast.LENGTH_SHORT).show();
+                    saveUserDetails(firebaseUser, name, email);
+                } else {
+                    Log.w("FirebaseAuth", "createUserWithEmail: failure", task.getException());
+                    Toast.makeText(SignUpScreen.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-    private void saveUserDetails(FirebaseUser firebaseUser,String fullName,String email){
+
+    private void saveUserDetails(FirebaseUser firebaseUser, String fullName, String email) {
         String userId = firebaseUser.getUid();
         Map<String, Object> user = new HashMap<>();
-        user.put("fullName",fullName);
-        user.put("email",email);
+        user.put("fullName", fullName);
+        user.put("email", email);
         db.collection("user").document(userId).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Log.d("FireStore","DocumentSnapshot successfully written");
-                Toast.makeText(SignUpScreen.this,"Registration Successful",Toast.LENGTH_SHORT).show();
+                Log.d("FireStore", "DocumentSnapshot successfully written");
+                Toast.makeText(SignUpScreen.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUpScreen.this, SignInScreen.class);
                 startActivity(intent);
                 finish();
@@ -148,8 +162,8 @@ public class SignUpScreen extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.w("FireStore","Error Writing document",e);
-                Toast.makeText(SignUpScreen.this,"Error saving user details",Toast.LENGTH_SHORT).show();
+                Log.w("FireStore", "Error Writing document", e);
+                Toast.makeText(SignUpScreen.this, "Error saving user details", Toast.LENGTH_SHORT).show();
             }
         });
 
