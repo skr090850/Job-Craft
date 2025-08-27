@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import com.example.jobcraft.R;
 import com.example.jobcraft.home.DashboardScreen;
 import com.example.jobcraft.splash_and_onboarding.OnBoardingScreen;
+import com.example.jobcraft.utils.CustomToast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -104,7 +105,8 @@ public class SignUpScreen extends AppCompatActivity {
         appleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SignUpScreen.this,"Apple SignIn is not working",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SignUpScreen.this,"Apple SignIn is not working",Toast.LENGTH_SHORT).show();
+                CustomToast.showToast(SignUpScreen.this,"Apple SignIn is not working",CustomToast.ERROR);
             }
         });
         facebookBtn.setOnClickListener(new View.OnClickListener() {
@@ -272,7 +274,7 @@ public class SignUpScreen extends AppCompatActivity {
                     }
                 });
     }
-    private void saveUserDetailsWithGoogleSignInToFirestore(FirebaseUser firebaseUser) {
+    private void saveUserDetailsWithGoogleSignInToFirestore(@NonNull FirebaseUser firebaseUser) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userId = firebaseUser.getUid();
         String fullName = firebaseUser.getDisplayName();
