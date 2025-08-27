@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,8 @@ public class SignUpScreen extends AppCompatActivity {
     private FirebaseFirestore db;
     private TextInputLayout tilName, tilEmail, tilPass, tilConfPass;
     private EditText etName, etEmail, etPass, etConfPass;
+    private ProgressBar progressBar;
+    private View dimOverlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class SignUpScreen extends AppCompatActivity {
         signInTxtBtn = findViewById(R.id.signInTextBtn);
         signUpBackBtn = findViewById(R.id.signUpBackBtn);
         signUpBtn = findViewById(R.id.signUpBtn);
+        progressBar = findViewById(R.id.progressBar);
+        dimOverlay = findViewById(R.id.dimOverlay);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -136,6 +141,7 @@ public class SignUpScreen extends AppCompatActivity {
         } else {
             tilConfPass.setError(null);
         }
+        showLoading(true);
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -145,8 +151,9 @@ public class SignUpScreen extends AppCompatActivity {
                     FirebaseUser firebaseUser = mAuth.getCurrentUser();
                     saveUserDetails(firebaseUser, name, email);
                 } else {
+                    showLoading(false);
                     Log.w("FirebaseAuth", "createUserWithEmail: failure", task.getException());
-                    Toast.makeText(SignUpScreen.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpScreen.this, "Authentication Failed."+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -160,6 +167,7 @@ public class SignUpScreen extends AppCompatActivity {
         db.collection("user").document(userId).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+                showLoading(false);
                 Log.d("FireStore", "DocumentSnapshot successfully written");
                 Toast.makeText(SignUpScreen.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUpScreen.this, SignInScreen.class);
@@ -169,10 +177,22 @@ public class SignUpScreen extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                showLoading(false);
                 Log.w("FireStore", "Error Writing document", e);
                 Toast.makeText(SignUpScreen.this, "Error saving user details", Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+    private void showLoading(boolean isLoading) {
+        if (isLoading) {
+            progressBar.setVisibility(View.VISIBLE);
+            dimOverlay.setVisibility(View.VISIBLE);
+            signUpBtn.setEnabled(false);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            dimOverlay.setVisibility(View.GONE);
+            signUpBtn.setEnabled(true);
+        }
     }
 }
