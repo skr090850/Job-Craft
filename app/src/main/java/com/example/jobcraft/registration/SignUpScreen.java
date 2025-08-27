@@ -23,6 +23,9 @@ import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.example.jobcraft.R;
 import com.example.jobcraft.splash_and_onboarding.OnBoardingScreen;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,6 +51,8 @@ public class SignUpScreen extends AppCompatActivity {
     private EditText etName, etEmail, etPass, etConfPass;
     private ProgressBar progressBar;
     private View dimOverlay;
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 9001;   // this is the request code, we can also write another number.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,10 @@ public class SignUpScreen extends AppCompatActivity {
         dimOverlay = findViewById(R.id.dimOverlay);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +162,7 @@ public class SignUpScreen extends AppCompatActivity {
                 } else {
                     showLoading(false);
                     Log.w("FirebaseAuth", "createUserWithEmail: failure", task.getException());
-                    Toast.makeText(SignUpScreen.this, "Authentication Failed."+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpScreen.this, "Authentication Failed." + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -184,6 +193,7 @@ public class SignUpScreen extends AppCompatActivity {
         });
 
     }
+
     private void showLoading(boolean isLoading) {
         if (isLoading) {
             progressBar.setVisibility(View.VISIBLE);
