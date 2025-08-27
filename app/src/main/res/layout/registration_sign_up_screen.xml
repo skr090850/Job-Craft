@@ -414,6 +414,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/continueTxt">
 
                     <ImageButton
+                        android:id="@+id/SignUpfacebookBtn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
@@ -425,6 +426,7 @@
                         android:contentDescription="Sign in with Facebook" />
 
                     <ImageButton
+                        android:id="@+id/SignUpGoogleBtn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
@@ -436,6 +438,7 @@
                         android:contentDescription="Sign in with Google" />
 
                     <ImageButton
+                        android:id="@+id/SignUpAppleBtn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"

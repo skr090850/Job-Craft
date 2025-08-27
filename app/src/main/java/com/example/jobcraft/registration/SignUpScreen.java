@@ -22,18 +22,23 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.example.jobcraft.R;
+import com.example.jobcraft.home.DashboardScreen;
 import com.example.jobcraft.splash_and_onboarding.OnBoardingScreen;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
@@ -43,7 +48,7 @@ import java.util.Objects;
 
 public class SignUpScreen extends AppCompatActivity {
     private TextView signInTxtBtn;
-    private ImageButton signUpBackBtn;
+    private ImageButton signUpBackBtn,facebookBtn,googleBtn,appleBtn;
     private Button signUpBtn;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -68,6 +73,9 @@ public class SignUpScreen extends AppCompatActivity {
         etConfPass = findViewById(R.id.signUpConfPass);
         signInTxtBtn = findViewById(R.id.signInTextBtn);
         signUpBackBtn = findViewById(R.id.signUpBackBtn);
+        facebookBtn = findViewById(R.id.SignUpfacebookBtn);
+        googleBtn = findViewById(R.id.SignUpGoogleBtn);
+        appleBtn = findViewById(R.id.SignUpAppleBtn);
         signUpBtn = findViewById(R.id.signUpBtn);
         progressBar = findViewById(R.id.progressBar);
         dimOverlay = findViewById(R.id.dimOverlay);
@@ -77,6 +85,7 @@ public class SignUpScreen extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +93,26 @@ public class SignUpScreen extends AppCompatActivity {
                 registerUser();
             }
         });
-
+        googleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLoading(true);
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
+        appleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SignUpScreen.this,"Apple SignIn is not working",Toast.LENGTH_SHORT).show();
+            }
+        });
+        facebookBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SignUpScreen.this,"Facebook SignIn is not working",Toast.LENGTH_SHORT).show();
+            }
+        });
         signInTxtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +138,6 @@ public class SignUpScreen extends AppCompatActivity {
             }
         }
     }
-
     private void registerUser() {
         String name = etName.getText().toString().trim(),
                 email = etEmail.getText().toString().trim(),
@@ -199,10 +226,75 @@ public class SignUpScreen extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             dimOverlay.setVisibility(View.VISIBLE);
             signUpBtn.setEnabled(false);
+            googleBtn.setEnabled(false);
+            facebookBtn.setEnabled(false);
+            appleBtn.setEnabled(false);
         } else {
             progressBar.setVisibility(View.GONE);
             dimOverlay.setVisibility(View.GONE);
             signUpBtn.setEnabled(true);
+            googleBtn.setEnabled(true);
+            facebookBtn.setEnabled(true);
+            appleBtn.setEnabled(true);
         }
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == RC_SIGN_IN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                Log.d("GoogleSignIn", "firebaseAuthWithGoogle:" + account.getId());
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                showLoading(false);
+                Log.w("GoogleSignIn", "Google sign in failed", e);
+                Toast.makeText(this, "Google Sign In Failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("FirebaseAuth", "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null) {
+                                saveUserDetailsWithGoogleSignInToFirestore(user);
+                            }
+                        } else {
+                            showLoading(false);
+                            Log.w("FirebaseAuth", "signInWithCredential:failure", task.getException());
+                            Toast.makeText(SignUpScreen.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+    private void saveUserDetailsWithGoogleSignInToFirestore(FirebaseUser firebaseUser) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String userId = firebaseUser.getUid();
+        String fullName = firebaseUser.getDisplayName();
+        String email = firebaseUser.getEmail();
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("fullName", fullName);
+        user.put("email", email);
+
+        db.collection("user").document(userId).set(user)
+                .addOnSuccessListener(aVoid -> {
+                    showLoading(false);
+                    Log.d("Firestore", "Google user details saved successfully.");
+                    Toast.makeText(SignUpScreen.this, "Sign In Successful!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SignUpScreen.this, DashboardScreen.class);
+                    startActivity(intent);
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    showLoading(false);
+                    Log.w("Firestore", "Error saving Google user details", e);
+                    Toast.makeText(SignUpScreen.this, "Failed to save user details.", Toast.LENGTH_SHORT).show();
+                });
     }
 }
