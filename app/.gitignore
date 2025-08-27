@@ -1,1 +1,50 @@
-/build
+# =========================================
+# Build files (Automatically generated)
+# =========================================
+*.apk
+*.aab
+*.ap_
+*.aapk
+*.zip
+/build/
+/app/build/
+
+# =========================================
+# Local configuration files (DO NOT SHARE THESE)
+# =========================================
+# Secret keys aur local SDK path ismein rakhein
+/local.properties
+
+# IDE settings files
+/.idea/
+.DS_Store
+
+# =========================================
+# Firebase configuration file (Optional - for public repos)
+# =========================================
+/app/google-services.json
+
+# =========================================
+# Gradle files
+# =========================================
+.gradle/
+build/
+
+# =========================================
+# Keystore files (VERY SENSITIVE - DO NOT SHARE)
+# =========================================
+*.jks
+*.keystore
+
+# =========================================
+# Log files
+# =========================================
+*.log
+
+# =========================================
+# Misc
+# =========================================
+/captures/
+.cxx/
+*.iml
+
