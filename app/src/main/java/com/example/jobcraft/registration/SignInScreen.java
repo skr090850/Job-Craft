@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import com.example.jobcraft.R;
 import com.example.jobcraft.splash_and_onboarding.OnBoardingScreen;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignInScreen extends AppCompatActivity {
@@ -31,7 +32,9 @@ public class SignInScreen extends AppCompatActivity {
     private ImageButton signInBackBtn;
     private Button signInBtn;
     private EditText etEmail,etPassword;
-    TextInputLayout tilEmail,tilPassword;
+    private TextInputLayout tilEmail,tilPassword;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,10 @@ public class SignInScreen extends AppCompatActivity {
         signInBtn = findViewById(R.id.signInBtn);
         tilEmail = findViewById(R.id.signInemailInputLayout);
         tilPassword = findViewById(R.id.signInPasswordInputLayout);
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
