@@ -47,11 +47,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignInScreen extends AppCompatActivity {
-    private TextView signUpTxtBtn,forgotTxtBtn;
-    private ImageButton signInBackBtn,facebookBtn,googleBtn,appleBtn;
+    private TextView signUpTxtBtn, forgotTxtBtn;
+    private ImageButton signInBackBtn, facebookBtn, googleBtn, appleBtn;
     private Button signInBtn;
-    private EditText etEmail,etPassword;
-    private TextInputLayout tilEmail,tilPassword;
+    private EditText etEmail, etPassword;
+    private TextInputLayout tilEmail, tilPassword;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private ProgressBar progressBar;
@@ -82,8 +82,7 @@ public class SignInScreen extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
-
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,26 +95,26 @@ public class SignInScreen extends AppCompatActivity {
                 } else {
                     tilEmail.setError(null);
                 }
-                if(password.isEmpty()){
+                if (password.isEmpty()) {
                     tilPassword.setError("Password cannot be empty");
                     return;
-                }else{
+                } else {
                     tilPassword.setError(null);
                 }
                 showLoading(true);
-                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         showLoading(false);
-                        if (task.isSuccessful()){
-                            Log.d("FirebaseAuth","SignInWithEmail:Success");
-                            CustomToast.showToast(SignInScreen.this,"Sign In Successful!",CustomToast.SUCCESS);
+                        if (task.isSuccessful()) {
+                            Log.d("FirebaseAuth", "SignInWithEmail:Success");
+                            CustomToast.showToast(SignInScreen.this, "Sign In Successful!", CustomToast.SUCCESS);
                             Intent intent = new Intent(SignInScreen.this, DashboardScreen.class);
                             startActivity(intent);
                             finish();
-                        }else {
-                            Log.w("FirebaseAuth","SignInWithEmail:Failure",task.getException());
-                            CustomToast.showToast(SignInScreen.this,"Authentication failed: "+task.getException().getMessage(),CustomToast.ERROR);
+                        } else {
+                            Log.w("FirebaseAuth", "SignInWithEmail:Failure", task.getException());
+                            CustomToast.showToast(SignInScreen.this, "Authentication failed: " + task.getException().getMessage(), CustomToast.ERROR);
                         }
                     }
                 });
@@ -132,19 +131,19 @@ public class SignInScreen extends AppCompatActivity {
         appleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomToast.showToast(SignInScreen.this,"Apple Sign in is not working",CustomToast.ERROR);
+                CustomToast.showToast(SignInScreen.this, "Apple Sign in is not working", CustomToast.ERROR);
             }
         });
         facebookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomToast.showToast(SignInScreen.this,"Facebook Sign in is not working",CustomToast.ERROR);
+                CustomToast.showToast(SignInScreen.this, "Facebook Sign in is not working", CustomToast.ERROR);
             }
         });
         forgotTxtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignInScreen.this,ResetPasswordScreen.class);
+                Intent intent = new Intent(SignInScreen.this, ResetPasswordScreen.class);
                 startActivity(intent);
             }
         });
@@ -172,6 +171,7 @@ public class SignInScreen extends AppCompatActivity {
             }
         }
     }
+
     private void showLoading(boolean isLoading) {
         if (isLoading) {
             progressBar.setVisibility(View.VISIBLE);
@@ -191,9 +191,9 @@ public class SignInScreen extends AppCompatActivity {
     }
 
     // Google sign in
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode == RC_SIGN_IN){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
@@ -202,10 +202,11 @@ public class SignInScreen extends AppCompatActivity {
             } catch (ApiException e) {
                 showLoading(false);
                 Log.w("GoogleSignIn", "Google sign in failed", e);
-                CustomToast.showToast(this, "Google Sign In Failed",CustomToast.ERROR);
+                CustomToast.showToast(this, "Google Sign In Failed", CustomToast.ERROR);
             }
         }
     }
+
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -220,11 +221,12 @@ public class SignInScreen extends AppCompatActivity {
                 } else {
                     showLoading(false);
                     Log.w("FirebaseAuth", "signInWithCredential:failure", task.getException());
-                    CustomToast.showToast(SignInScreen.this, "Authentication failed:"+task.getException().getMessage(), CustomToast.ERROR);
+                    CustomToast.showToast(SignInScreen.this, "Authentication failed:" + task.getException().getMessage(), CustomToast.ERROR);
                 }
             }
         });
     }
+
     private void saveUserDetailsWithGoogleSignInToFirestore(@NonNull FirebaseUser firebaseUser) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userId = firebaseUser.getUid();
@@ -249,5 +251,14 @@ public class SignInScreen extends AppCompatActivity {
                     Log.w("Firestore", "Error saving Google user details", e);
                     CustomToast.showToast(SignInScreen.this, "Failed to save user details.", CustomToast.ERROR);
                 });
+    }
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent intent = new Intent(SignInScreen.this, DashboardScreen.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
