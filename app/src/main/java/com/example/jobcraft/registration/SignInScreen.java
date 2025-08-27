@@ -220,7 +220,7 @@ public class SignInScreen extends AppCompatActivity {
                 } else {
                     showLoading(false);
                     Log.w("FirebaseAuth", "signInWithCredential:failure", task.getException());
-                    CustomToast.showToast(SignInScreen.this, "Authentication Failed.", CustomToast.ERROR);
+                    CustomToast.showToast(SignInScreen.this, "Authentication failed:"+task.getException().getMessage(), CustomToast.ERROR);
                 }
             }
         });
