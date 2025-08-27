@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -112,12 +113,18 @@ public class SignUpScreen extends AppCompatActivity {
         if (email.isEmpty()) {
             tilEmail.setError("Email cannot be empty");
             return;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            tilEmail.setError("Please enter a valid email address");
+            return;
         } else {
             tilEmail.setError(null);
         }
 
         if (password.isEmpty()) {
             tilPass.setError("Password cannot be empty");
+            return;
+        } else if (password.length() < 6) {
+            tilPass.setError("Password must be at least 6 characters");
             return;
         } else {
             tilPass.setError(null);
