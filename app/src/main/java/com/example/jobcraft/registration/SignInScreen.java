@@ -252,13 +252,4 @@ public class SignInScreen extends AppCompatActivity {
                     CustomToast.showToast(SignInScreen.this, "Failed to save user details.", CustomToast.ERROR);
                 });
     }
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(SignInScreen.this, DashboardScreen.class);
-            startActivity(intent);
-            finish();
-        }
-    }
 }

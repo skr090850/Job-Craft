@@ -16,8 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.jobcraft.R;
+import com.example.jobcraft.home.DashboardScreen;
 import com.example.jobcraft.registration.SignInScreen;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,7 @@ public class OnBoardingScreen extends AppCompatActivity {
     private Handler sliderHandler = new Handler(Looper.getMainLooper());
     private TabLayout tabLayout;
     private Button startBtn;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class OnBoardingScreen extends AppCompatActivity {
         viewPager2 = findViewById(R.id.onboardingSlider);
         tabLayout = findViewById(R.id.onBoardingTabIndicator);
         startBtn = findViewById(R.id.onBoardingBtn);
+        mAuth = FirebaseAuth.getInstance();
         sliderItems = new ArrayList<>();
 
         sliderItems.add(new SliderItem(R.drawable.on_boarding_ic_1,"Search Job Easier\nand More Effective","Make your experience of searching job\nmore easier and more effective"));
@@ -151,5 +156,14 @@ public class OnBoardingScreen extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         sliderHandler.postDelayed(sliderRunnable, 3000);
+    }
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent intent = new Intent(OnBoardingScreen.this, DashboardScreen.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
