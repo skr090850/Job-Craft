@@ -11,19 +11,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.example.jobcraft.R;
 import com.example.jobcraft.home.DashboardScreen;
-import com.example.jobcraft.splash_and_onboarding.OnBoardingScreen;
+import com.example.jobcraft.profile.PersonalInfoScreen;
 import com.example.jobcraft.utils.CustomToast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -41,11 +37,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class SignUpScreen extends AppCompatActivity {
     private TextView signInTxtBtn;
@@ -207,7 +201,7 @@ public class SignUpScreen extends AppCompatActivity {
                 showLoading(false);
                 Log.d("FireStore", "DocumentSnapshot successfully written");
                 CustomToast.showToast(SignUpScreen.this, "Registration Successful", CustomToast.SUCCESS);
-                Intent intent = new Intent(SignUpScreen.this, SignInScreen.class);
+                Intent intent = new Intent(SignUpScreen.this, PersonalInfoScreen.class);
                 startActivity(intent);
                 finish();
             }
