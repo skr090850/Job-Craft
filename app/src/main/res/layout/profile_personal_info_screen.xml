@@ -122,7 +122,7 @@
                     android:id="@+id/NameLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="4dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/headingLine"
@@ -169,6 +169,65 @@
                         android:textColor="?attr/textPrimaryColor"
                         android:hint="Type your full name"
                         android:inputType="textPersonName" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/dobLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profilePersonalContactInputLayout"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date of Birth"
+                        android:textSize="18sp"
+                        android:textColor="?attr/textPrimaryColor"
+                        android:fontFamily="@font/urbanist_bold"
+                        />
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profilePersonalDobInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="?attr/textSecondaryColor"
+                    app:hintTextColor="?attr/textPrimaryColor"
+                    app:cursorColor="?attr/textPrimaryColor"
+                    app:cursorErrorColor="@color/red"
+                    app:boxStrokeColor="@color/icon_selector"
+                    app:boxStrokeErrorColor="@color/red"
+                    android:layout_marginTop="4dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:startIconDrawable="@drawable/ic_calendar"
+                    app:startIconTint="@color/icon_selector"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_arrow_down"
+                    app:layout_constraintTop_toBottomOf="@id/dobLabel">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/prpfilePersonalDob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist_bold"
+                        android:textColorHint="?attr/textSecondaryColor"
+                        android:textColor="?attr/textPrimaryColor"
+                        android:hint="Select date of birth"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:cursorVisible="true"
+                        android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -225,8 +284,6 @@
                         android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-
 
 <!--                <androidx.appcompat.widget.AppCompatButton-->
 <!--                    android:id="@+id/signInBtn"-->
