@@ -1,6 +1,7 @@
 package com.example.jobcraft.profile;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +38,13 @@ public class PersonalInfoScreen extends AppCompatActivity {
         setContentView(binding.getRoot());
         setDatePicker();
         setupGenderDropdown();
+        binding.profilePersonalBtnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PersonalInfoScreen.this,InterestScreen.class);
+                startActivity(intent);
+            }
+        });
 
 
         WindowInsetsControllerCompat windowInsetsController =
