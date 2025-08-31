@@ -68,8 +68,8 @@
                 android:paddingHorizontal="25dp">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profileImageView"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/profile_photo_bg"
                     android:padding="15dp"
@@ -150,10 +150,10 @@
                     app:boxStrokeColor="@color/icon_selector"
                     app:boxStrokeErrorColor="@color/red"
                     android:layout_marginTop="4dp"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusBottomEnd="18dp"
+                    app:boxCornerRadiusBottomStart="18dp"
+                    app:boxCornerRadiusTopEnd="18dp"
+                    app:boxCornerRadiusTopStart="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:startIconDrawable="@drawable/user_ic"
@@ -169,6 +169,61 @@
                         android:textColor="?attr/textPrimaryColor"
                         android:hint="Type your full name"
                         android:inputType="textPersonName" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ContactLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profilePersonalNameInputLayout"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact Number "
+                        android:textSize="18sp"
+                        android:textColor="?attr/textPrimaryColor"
+                        android:fontFamily="@font/urbanist_bold"
+                        />
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profilePersonalContactInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="?attr/textSecondaryColor"
+                    app:hintTextColor="?attr/textPrimaryColor"
+                    app:cursorColor="?attr/textPrimaryColor"
+                    app:cursorErrorColor="@color/red"
+                    app:boxStrokeColor="@color/icon_selector"
+                    app:boxStrokeErrorColor="@color/red"
+                    android:layout_marginTop="4dp"
+                    app:boxCornerRadiusBottomEnd="18dp"
+                    app:boxCornerRadiusBottomStart="18dp"
+                    app:boxCornerRadiusTopEnd="18dp"
+                    app:boxCornerRadiusTopStart="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:startIconDrawable="@drawable/ic_call"
+                    app:startIconTint="@color/icon_selector"
+                    app:layout_constraintTop_toBottomOf="@id/ContactLabel">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/prpfilePersonalContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist_bold"
+                        android:textColorHint="?attr/textSecondaryColor"
+                        android:textColor="?attr/textPrimaryColor"
+                        android:hint="Type your contact number"
+                        android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -204,10 +259,10 @@
                     app:boxStrokeColor="@color/icon_selector"
                     app:boxStrokeErrorColor="@color/red"
                     android:layout_marginTop="4dp"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusBottomEnd="18dp"
+                    app:boxCornerRadiusBottomStart="18dp"
+                    app:boxCornerRadiusTopEnd="18dp"
+                    app:boxCornerRadiusTopStart="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:startIconDrawable="@drawable/ic_calendar"
@@ -227,23 +282,23 @@
                         android:focusable="false"
                         android:clickable="true"
                         android:cursorVisible="true"
-                        android:inputType="number" />
+                        android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
-                    android:id="@+id/ContactLabel"
+                    android:id="@+id/genderLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="4dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/profilePersonalNameInputLayout"
+                    app:layout_constraintTop_toBottomOf="@id/profilePersonalDobInputLayout"
                     >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Contact Number "
+                        android:text="Gender"
                         android:textSize="18sp"
                         android:textColor="?attr/textPrimaryColor"
                         android:fontFamily="@font/urbanist_bold"
@@ -252,9 +307,9 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/profilePersonalContactInputLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
+                    android:id="@+id/profilePersonalGenderInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="?attr/textSecondaryColor"
                     app:hintTextColor="?attr/textPrimaryColor"
@@ -263,29 +318,33 @@
                     app:boxStrokeColor="@color/icon_selector"
                     app:boxStrokeErrorColor="@color/red"
                     android:layout_marginTop="4dp"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusBottomEnd="18dp"
+                    app:boxCornerRadiusBottomStart="18dp"
+                    app:boxCornerRadiusTopEnd="18dp"
+                    app:boxCornerRadiusTopStart="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:startIconDrawable="@drawable/ic_call"
+                    app:startIconDrawable="@drawable/ic_gender"
                     app:startIconTint="@color/icon_selector"
-                    app:layout_constraintTop_toBottomOf="@id/ContactLabel">
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_arrow_down"
+                    app:layout_constraintTop_toBottomOf="@id/genderLabel">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/prpfilePersonalContact"
+                    <AutoCompleteTextView
+                        android:id="@+id/prpfilePersonalGender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/urbanist_bold"
                         android:textColorHint="?attr/textSecondaryColor"
                         android:textColor="?attr/textPrimaryColor"
-                        android:hint="Type your contact number"
-                        android:inputType="number" />
+                        android:hint="Select your gender"
+                        android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-<!--                <androidx.appcompat.widget.AppCompatButton-->
+
+
+                <!--                <androidx.appcompat.widget.AppCompatButton-->
 <!--                    android:id="@+id/signInBtn"-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="60dp"-->
