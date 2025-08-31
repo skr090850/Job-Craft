@@ -5,6 +5,96 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_bg"
     tools:context=".profile.InterestScreen">
+
+    <RelativeLayout
+        android:id="@+id/interestTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        >
+        <ImageButton
+            android:id="@+id/interestBackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/left_arrow_ic"
+            android:background="@android:color/transparent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:theme="@style/ForceDarkTheme"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Interest"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="?attr/textPrimaryColor"
+            android:fontFamily="@font/urbanist_bold"
+            android:layout_centerInParent="true"
+            android:theme="@style/ForceDarkTheme"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/interestHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/interestTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="25dp"
+        android:fontFamily="@font/urbanist_bold"
+        android:layout_marginTop="30dp"
+        android:text="What Type of Jon Your Looking For?"
+        android:textColor="?attr/textPrimaryColor"
+        android:textSize="18sp"
+        android:theme="@style/ForceDarkTheme"
+        />
+    <TextView
+        android:id="@+id/interestSubHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/interestHeading"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="10dp"
+        android:fontFamily="@font/urbanist_bold"
+        android:text="Choose your job categories and well click the job vacancy for you"
+        android:textColor="?attr/textSecondaryColor"
+        android:textSize="15sp"
+        android:theme="@style/ForceDarkTheme"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/interestSubHeading"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="?attr/primaryBgColor"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/urbanist_bold"
+            android:text="Choose your job categories and well click the job vacancy for you"
+            android:textColor="?attr/textSecondaryColor"
+            android:textSize="15sp"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
