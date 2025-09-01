@@ -3,8 +3,118 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="?attr/primaryBgColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".profile.SuccessScreen">
+    <RelativeLayout
+        android:id="@+id/successTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        >
+        <ImageButton
+            android:id="@+id/successBackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/left_arrow_ic"
+            android:background="@android:color/transparent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Success"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="?attr/textPrimaryColor"
+            android:fontFamily="@font/urbanist_bold"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp"
+        android:elevation="15dp"
+        app:cardCornerRadius="50dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/primaryBgColor"
+            android:padding="25dp"
+
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/img_success"
+                />
+            <TextView
+                android:id="@+id/subHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="You have successfully created account"
+                android:fontFamily="@font/urbanist_bold"
+                android:textColor="?attr/textSecondaryColor"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:paddingBottom="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/subHeading"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Your Account Set"
+                android:layout_marginBottom="18dp"
+                android:fontFamily="@font/urbanist_bold"
+                android:textColor="?attr/textPrimaryColor"
+                android:gravity="center"
+                android:textSize="30sp"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cnfmNewAccBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/btn_bg"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="Back to Home"
+        android:textColor="?attr/btnTextColor"
+        android:textSize="20sp"
+        android:fontFamily="@font/urbanist_bold"
+        android:elevation="10dp"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
