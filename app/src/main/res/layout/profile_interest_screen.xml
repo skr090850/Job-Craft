@@ -5,16 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_violet_blue_white"
     tools:context=".profile.InterestScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerLayout"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="250dp"
         android:background="@drawable/gradient_bg"
         android:paddingHorizontal="25dp"
-        android:paddingVertical="20dp"
+        android:paddingVertical="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -84,23 +83,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/interestRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/interestRecyclerView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:padding="16dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/profile_list_item_interest" />
+            android:paddingVertical="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/profile_list_item_interest" />
 
-        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/interestBtn"
