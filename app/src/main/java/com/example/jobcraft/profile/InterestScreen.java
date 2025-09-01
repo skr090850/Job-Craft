@@ -1,5 +1,6 @@
 package com.example.jobcraft.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -57,6 +58,8 @@ public class InterestScreen extends AppCompatActivity {
                 message = "Please select at least one interest.";
             } else {
                 message = "Selected: " + String.join(", ", selectedInterests);
+                Intent intent = new Intent(InterestScreen.this,CnfmNewAccScreen.class);
+                startActivity(intent);
             }
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         });
