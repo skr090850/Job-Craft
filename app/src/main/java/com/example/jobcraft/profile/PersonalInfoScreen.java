@@ -46,7 +46,6 @@ public class PersonalInfoScreen extends AppCompatActivity {
             }
         });
 
-
         WindowInsetsControllerCompat windowInsetsController =
                 ViewCompat.getWindowInsetsController(getWindow().getDecorView());
         if (windowInsetsController != null) {
