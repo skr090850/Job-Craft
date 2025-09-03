@@ -69,7 +69,7 @@ public class PersonalInfoScreen extends AppCompatActivity {
         binding.profilePersonalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                saveUserData();
             }
         });
 
@@ -108,7 +108,42 @@ public class PersonalInfoScreen extends AppCompatActivity {
             }
         });
     }
+    private void saveUserData(){
+        String fullname = binding.profilePersonalName.getText().toString().trim();
+        String contact = binding.profilePersonalContact.getText().toString().trim();
+        String dob = binding.profilePersonalDob.getText().toString().trim();
+        String gender = binding.profilePersonalGender.getText().toString().trim();
+        String contactRegex = "^[6-9]\\d{9}$";
+        if (fullname.isEmpty()){
+            binding.profilePersonalNameInputLayout.setError("Name cannot be empty");
+            return;
+        }else {
+            binding.profilePersonalNameInputLayout.setError(null);
+        }
+        if (contact.isEmpty()){
+            binding.profilePersonalContactInputLayout.setError("Contact number cannot be empty");
+            return;
+        }else if (!contact.matches(contactRegex)) {
+            binding.profilePersonalContactInputLayout.setError("Please enter a valid 10-digit number");
+            return;
+        }else {
+            binding.profilePersonalContactInputLayout.setError(null);
+        }
+        if(dob.isEmpty()){
+            binding.profilePersonalDobInputLayout.setError("Date of birth is required");
+            return;
+        }else {
+            binding.profilePersonalDobInputLayout.setError(null);
+        }
+        if (gender.isEmpty()){
+            binding.profilePersonalGenderInputLayout.setError("Gender is required");
+            return;
+        }else {
+            binding.profilePersonalGenderInputLayout.setError(null);
+        }
 
+
+    }
     private void setDatePicker(){
         binding.profilePersonalDob.setOnClickListener(new View.OnClickListener() {
             @Override
