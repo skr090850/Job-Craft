@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -12,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,22 +22,41 @@ import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.example.jobcraft.R;
 import com.example.jobcraft.databinding.ProfilePersonalInfoScreenBinding;
+import com.example.jobcraft.utils.CustomToast;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class PersonalInfoScreen extends AppCompatActivity {
     private ProfilePersonalInfoScreenBinding binding;
+    private String userId;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ProfilePersonalInfoScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        db = FirebaseFirestore.getInstance();
+        Intent intent = getIntent();
+        if(intent!=null&& intent.hasExtra("USER_ID")){
+            userId = intent.getStringExtra("USER_ID");
+            loadUserData();
+        }else {
+            CustomToast.showToast(this, "Error: User ID not found.", CustomToast.ERROR);
+            finish();
+            return;
+        }
         setDatePicker();
         setupGenderDropdown();
         binding.profilePersonalBtnSkip.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +64,12 @@ public class PersonalInfoScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PersonalInfoScreen.this,InterestScreen.class);
                 startActivity(intent);
+            }
+        });
+        binding.profilePersonalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
@@ -58,6 +85,31 @@ public class PersonalInfoScreen extends AppCompatActivity {
             }
         }
     }
+    private void loadUserData(){
+        showLoading(true);
+        db.collection("user").document(userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    String fullName = documentSnapshot.getString("fullName");
+                    if (fullName!=null){
+                        binding.profilePersonalName.setText(fullName);
+                    }
+                }else {
+                    Log.d("Firestore","No Such Document");
+                }
+                showLoading(false);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                showLoading(false);
+                Log.w("Firestore", "Error getting document", e);
+                CustomToast.showToast(PersonalInfoScreen.this, "Failed to load user data.", CustomToast.ERROR);
+            }
+        });
+    }
+
     private void setDatePicker(){
         binding.profilePersonalDob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,5 +148,14 @@ public class PersonalInfoScreen extends AppCompatActivity {
         );
 
         binding.profilePersonalGender.setAdapter(adapter);
+    }
+    private void showLoading(boolean isLoading) {
+        if (isLoading) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            binding.dimOverlay.setVisibility(View.VISIBLE);
+        } else {
+            binding.progressBar.setVisibility(View.GONE);
+            binding.dimOverlay.setVisibility(View.GONE);
+        }
     }
 }

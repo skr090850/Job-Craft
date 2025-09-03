@@ -202,6 +202,7 @@ public class SignUpScreen extends AppCompatActivity {
                 Log.d("FireStore", "DocumentSnapshot successfully written");
                 CustomToast.showToast(SignUpScreen.this, "Registration Successful", CustomToast.SUCCESS);
                 Intent intent = new Intent(SignUpScreen.this, PersonalInfoScreen.class);
+                intent.putExtra("USER_ID",userId);
                 startActivity(intent);
                 finish();
             }
