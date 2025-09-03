@@ -141,8 +141,30 @@ public class PersonalInfoScreen extends AppCompatActivity {
         }else {
             binding.profilePersonalGenderInputLayout.setError(null);
         }
-
-
+        showLoading(true);
+        Map<String,Object> personInfo = new HashMap<>();
+        personInfo.put("fullname",fullname);
+        personInfo.put("contactNumber",contact);
+        personInfo.put("dateOfBirth",dob);
+        personInfo.put("gender",gender);
+        db.collection("user").document(userId).update(personInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                showLoading(false);
+                Log.d("Firestore", "User personal info successfully updated!");
+                CustomToast.showToast(PersonalInfoScreen.this, "Profile Updated!", CustomToast.SUCCESS);
+                Intent intent = new Intent(PersonalInfoScreen.this, InterestScreen.class);
+                startActivity(intent);
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                showLoading(false);
+                Log.w("Firestore", "Error updating document", e);
+                CustomToast.showToast(PersonalInfoScreen.this, "Failed to update profile.", CustomToast.ERROR);
+            }
+        });
     }
     private void setDatePicker(){
         binding.profilePersonalDob.setOnClickListener(new View.OnClickListener() {
