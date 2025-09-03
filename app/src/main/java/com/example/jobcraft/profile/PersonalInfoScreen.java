@@ -168,6 +168,9 @@ public class PersonalInfoScreen extends AppCompatActivity {
                         month,
                         day
                 );
+                Calendar  maxDateCalendar = Calendar.getInstance();
+                maxDateCalendar.add(Calendar.YEAR,-16);
+                datePickerDialog.getDatePicker().setMaxDate(maxDateCalendar.getTimeInMillis());
                 datePickerDialog.show();
             }
         });
