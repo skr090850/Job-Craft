@@ -135,6 +135,14 @@
                         android:textColor="?attr/textPrimaryColor"
                         android:fontFamily="@font/urbanist_bold"
                         />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textSize="18sp"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/urbanist_bold"
+                        />
                 </LinearLayout>
 
 
@@ -171,6 +179,67 @@
                         android:inputType="textPersonName" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:id="@+id/emailLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profilePersonalNameInputLayout"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email "
+                        android:textSize="18sp"
+                        android:textColor="?attr/textPrimaryColor"
+                        android:fontFamily="@font/urbanist_bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textSize="18sp"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/urbanist_bold"
+                        />
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profilePersonalEmailInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="?attr/textSecondaryColor"
+                    app:hintTextColor="?attr/textPrimaryColor"
+                    app:cursorColor="?attr/textPrimaryColor"
+                    app:cursorErrorColor="@color/red"
+                    app:boxStrokeColor="@color/icon_selector"
+                    app:boxStrokeErrorColor="@color/red"
+                    android:layout_marginTop="4dp"
+                    app:boxCornerRadiusBottomEnd="18dp"
+                    app:boxCornerRadiusBottomStart="18dp"
+                    app:boxCornerRadiusTopEnd="18dp"
+                    app:boxCornerRadiusTopStart="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:startIconDrawable="@drawable/sms_ic"
+                    app:startIconTint="@color/icon_selector"
+                    app:layout_constraintTop_toBottomOf="@id/emailLabel">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/profilePersonalEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist_bold"
+                        android:textColorHint="?attr/textSecondaryColor"
+                        android:textColor="?attr/textPrimaryColor"
+                        android:hint="Type your email"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <LinearLayout
@@ -180,7 +249,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="4dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/profilePersonalNameInputLayout"
+                    app:layout_constraintTop_toBottomOf="@id/profilePersonalEmailInputLayout"
                     >
                     <TextView
                         android:layout_width="wrap_content"
@@ -188,6 +257,14 @@
                         android:text="Contact Number "
                         android:textSize="18sp"
                         android:textColor="?attr/textPrimaryColor"
+                        android:fontFamily="@font/urbanist_bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textSize="18sp"
+                        android:textColor="@color/red"
                         android:fontFamily="@font/urbanist_bold"
                         />
                 </LinearLayout>
@@ -242,6 +319,14 @@
                         android:text="Date of Birth"
                         android:textSize="18sp"
                         android:textColor="?attr/textPrimaryColor"
+                        android:fontFamily="@font/urbanist_bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textSize="18sp"
+                        android:textColor="@color/red"
                         android:fontFamily="@font/urbanist_bold"
                         />
                 </LinearLayout>
@@ -301,6 +386,14 @@
                         android:text="Gender"
                         android:textSize="18sp"
                         android:textColor="?attr/textPrimaryColor"
+                        android:fontFamily="@font/urbanist_bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textSize="18sp"
+                        android:textColor="@color/red"
                         android:fontFamily="@font/urbanist_bold"
                         />
                 </LinearLayout>

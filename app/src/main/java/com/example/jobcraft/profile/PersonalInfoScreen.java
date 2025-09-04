@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -91,8 +92,10 @@ public class PersonalInfoScreen extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()){
                     String fullName = documentSnapshot.getString("fullName");
-                    if (fullName!=null){
+                    String email = documentSnapshot.getString("email");
+                    if (fullName!=null && email!=null){
                         binding.profilePersonalName.setText(fullName);
+                        binding.profilePersonalEmail.setText(email);
                     }
                 }else {
                     Log.d("Firestore","No Such Document");
@@ -110,6 +113,7 @@ public class PersonalInfoScreen extends AppCompatActivity {
     }
     private void saveUserData(){
         String fullname = binding.profilePersonalName.getText().toString().trim();
+        String email = binding.profilePersonalEmail.getText().toString().trim();
         String contact = binding.profilePersonalContact.getText().toString().trim();
         String dob = binding.profilePersonalDob.getText().toString().trim();
         String gender = binding.profilePersonalGender.getText().toString().trim();
@@ -119,6 +123,15 @@ public class PersonalInfoScreen extends AppCompatActivity {
             return;
         }else {
             binding.profilePersonalNameInputLayout.setError(null);
+        }
+        if (email.isEmpty()) {
+            binding.profilePersonalEmailInputLayout.setError("Email cannot be empty");
+            return;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.profilePersonalEmailInputLayout.setError("Please enter a valid email address");
+            return;
+        } else {
+            binding.profilePersonalEmailInputLayout.setError(null);
         }
         if (contact.isEmpty()){
             binding.profilePersonalContactInputLayout.setError("Contact number cannot be empty");
@@ -143,7 +156,7 @@ public class PersonalInfoScreen extends AppCompatActivity {
         }
         showLoading(true);
         Map<String,Object> personInfo = new HashMap<>();
-        personInfo.put("fullname",fullname);
+        personInfo.put("fullName",fullname);
         personInfo.put("contactNumber",contact);
         personInfo.put("dateOfBirth",dob);
         personInfo.put("gender",gender);
